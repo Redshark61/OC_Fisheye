@@ -1,19 +1,24 @@
-import type { photographer } from '../../@types/'
+import type { Photographer } from '../../@types/'
 
-export function photographerFactory(data: photographer) {
-    const { name, portrait } = data;
+export class photographerFactory {
+    name: string
+    portrait: string
+    pictureURL: string
 
-    const picture = `assets/photographers/${portrait}`;
+    constructor(data: Photographer) {
+        this.name = data.name;
+        this.portrait = data.portrait;
+        this.pictureURL = `/assets/photos/Photographers ID Photos/${this.portrait}`;
+    }
 
-    function getUserCardDOM() {
+    getUserCardDOM() {
         const article = document.createElement('article');
         const img = document.createElement('img');
-        img.setAttribute("src", picture)
+        img.setAttribute("src", this.pictureURL)
         const h2 = document.createElement('h2');
-        h2.textContent = name;
+        h2.textContent = this.name;
         article.appendChild(img);
         article.appendChild(h2);
         return (article);
     }
-    return { name, picture, getUserCardDOM }
 }

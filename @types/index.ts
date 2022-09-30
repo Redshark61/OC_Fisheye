@@ -1,4 +1,4 @@
-export type photographer = {
+export type Photographer = {
   name: string,
   id: number,
   city: string,
@@ -8,4 +8,18 @@ export type photographer = {
   portrait: string,
 }
 
-export type photographerList = photographer[];
+export type Media = {
+  id: number,
+  photographerId: number,
+  title: string,
+  image?: string,
+  video?: string,
+  likes: number,
+  date: string,
+  price: number,
+}
+
+export type Data = {
+  photographers: Photographer[],
+  media: Media[],
+}
