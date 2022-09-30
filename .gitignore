@@ -1,3 +1,4 @@
 assets/photos/
 node_modules/
+**/*.js.map
 *.map
