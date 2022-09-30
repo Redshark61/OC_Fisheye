@@ -4,10 +4,10 @@ export function displayModal() {
         modal.style.display = "block";
     }
 }
+
 export function closeModal() {
     const modal = document.getElementById("contact_modal");
     if (modal) {
         modal.style.display = "none";
     }
 }
-//# sourceMappingURL=contactForm.js.map
