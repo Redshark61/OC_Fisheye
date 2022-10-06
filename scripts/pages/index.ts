@@ -1,5 +1,5 @@
 import type { Photographer, Data } from "../../@types";
-import { photographerFactory } from "../factories/photographer.js";
+import { PhotographerFactory } from "../factories/photographer.js";
 
 async function getPhotographers(): Promise<{ photographers: Photographer[] }> {
 	// Penser à remplacer par les données récupérées dans le json
@@ -14,7 +14,7 @@ async function displayData(photographers: Photographer[]) {
 	const photographersSection = document.querySelector<HTMLDivElement>(".photographer_section");
 
 	photographers.forEach((photographer) => {
-		const photographerModel = new photographerFactory(photographer);
+		const photographerModel = new PhotographerFactory(photographer);
 		const userCardDOM = photographerModel.getUserCardDOM();
 		photographersSection?.appendChild(userCardDOM);
 	});
