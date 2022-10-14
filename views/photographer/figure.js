@@ -38,7 +38,9 @@ export class Figure {
 		likes.classList.add("gallery-likes");
 		likes.innerHTML =
 			this._media.likes +
-			"<img src='../../assets/icons/heart-empty.svg' class='like' alt='likes' />";
+			`<img src='../../assets/icons/heart${
+				!this._media.isLiked ? "-empty" : ""
+			}.svg' class='like' alt='likes' />`;
 
 		likes.addEventListener("click", () => {
 			this._Factory.like(this._media);
