@@ -8,6 +8,7 @@
 
 body {
 	font-family: "DM Sans", sans-serif;
+	position: relative;
 }
 
 header {
@@ -81,6 +82,14 @@ h1 {
 	border-radius: 5px;
 	animation: blink 1s infinite;
 	z-index: -1;
+}
+
+.hidden {
+	display: none;
+}
+
+.overflow-hidden {
+	overflow: hidden;
 }
 
 .image-wrapper {
