@@ -1,4 +1,7 @@
-import thumbnailCreator from "../utils/thumbnailCreator.js";
+import { Figure } from "./../../views/photographer/figure.js";
+import { Video } from "./../../views/photographer/video.js";
+import { Photo } from "./../../views/photographer/photo.js";
+import { PhotographerThumbnail } from "./../../views/photographer/thumbnail.js";
 
 /**
  * @typedef {import('../../@types/index').Media} Media
@@ -13,16 +16,15 @@ export class GalleryFactory {
 		this._data;
 		/** @type {Photographer} @private*/
 		this._photographer;
-		/** @type {Media[]} @private*/
+		/** @type {Media[]}*/
 		this._media;
 		/** @private */
 		this._totalLikes = 0;
 		/**
-		 * @private
 		 * @typedef {{ title: string, src: string, id: number, type:string } } Image
 		 * @type {Image[]}
 		 */
-		this._images = [];
+		this.images = [];
 		/** @private */
 		this._currentIndex = 0;
 		/** @private */
@@ -36,7 +38,7 @@ export class GalleryFactory {
 				/**
 				 * @param {Data} data
 				 * @returns {Data}
-				 * */
+				 */
 				(data) => data
 			);
 
@@ -65,7 +67,7 @@ export class GalleryFactory {
 			await this._fetchData();
 		}
 
-		this._media = this._data.media.filter(
+		this.media = this._data.media.filter(
 			/**
 			 * @param {Media} media
 			 * @returns {boolean}
@@ -80,22 +82,8 @@ export class GalleryFactory {
 		const header = document.querySelector(".photograph-header");
 		const description = document.querySelector(".photograph-description");
 
-		const title = document.createElement("h1");
-		title.classList.add("photograph-title");
-		title.textContent = this._photographer.name;
-
-		const location = document.createElement("h2");
-		location.classList.add("photograph-location");
-		location.textContent = this._photographer.city + ", " + this._photographer.country;
-
-		const tagline = document.createElement("p");
-		tagline.classList.add("photograph-tagline");
-		tagline.textContent = this._photographer.tagline;
-
-		const image = document.createElement("img");
-		image.setAttribute("alt", this._photographer.name);
-		image.classList.add("photograph-image");
-		image.src = `../../assets/photos/Photographers ID Photos/${this._photographer.portrait}`;
+		const thumbnail = new PhotographerThumbnail(this._photographer);
+		const { title, location, tagline, image } = thumbnail.create();
 
 		description.append(title, location, tagline);
 		header.append(image);
@@ -103,7 +91,10 @@ export class GalleryFactory {
 
 	/**@param {Media[]} medias*/
 	buildPhotographerGallery(medias) {
-		this._images = [];
+		this.images = [];
+		this._totalLikes = 0;
+
+		/** @type {HTMLDivElement} */
 		const gallery = document.querySelector(".photograph-gallery");
 		if (gallery.childElementCount > 0) {
 			gallery.innerHTML = "";
@@ -123,44 +114,26 @@ export class GalleryFactory {
 				let wrapper;
 				let type = "image";
 				const src = `${this._getPath()}${media?.image ?? media?.video}`;
+
 				if (media.image) {
-					const image = document.createElement("img");
-					wrapper = document.createElement("div");
-					wrapper.classList.add("image-wrapper");
-					image.setAttribute("alt", media.title);
-					image.classList.add("gallery-image");
-					image.src = src;
-					wrapper.append(image);
+					const photo = new Photo(media, src);
+					wrapper = photo.create();
 				} else {
-					const canvas = thumbnailCreator(src);
-					wrapper = document.createElement("div");
-					wrapper.classList.add("canvas-wrapper");
-					wrapper.append(canvas);
-					type = "video";
+					const video = new Video(src);
+					({ wrapper, type } = video.create());
 				}
 
-				const figcaption = document.createElement("figcaption");
-				figcaption.classList.add("gallery-figcaption");
-
-				const title = document.createElement("h3");
-				title.classList.add("gallery-title");
-				title.textContent = media.title;
-
-				const likes = document.createElement("p");
-				likes.classList.add("gallery-likes");
-				likes.innerHTML =
-					media.likes +
-					"<img src='../../assets/icons/heart.svg' class='like' alt='likes' />";
-
-				const currentImage = { title: media.title, src, id: i, type };
-				this._images.push(currentImage);
-
-				figure.addEventListener("click", (e) => {
-					this._openImage(e, currentImage);
-				});
-				figcaption.append(title, likes);
-				figure.append(wrapper, figcaption);
-				gallery.append(figure);
+				const figureRenderer = new Figure(
+					this,
+					media,
+					figure,
+					gallery,
+					src,
+					type,
+					i,
+					wrapper
+				);
+				figureRenderer.render();
 			}
 		);
 
@@ -199,11 +172,10 @@ export class GalleryFactory {
 	}
 
 	/**
-	 * @private
 	 * @param {MouseEvent} event
 	 * @param {{title: string, src: string, id:number, type:string}} image
 	 */
-	_openImage(event, image) {
+	openImage(event, image) {
 		this._currentIndex = image.id;
 		const modal = document.createElement("figure");
 		modal.classList.add("modal-photo");
@@ -266,7 +238,7 @@ export class GalleryFactory {
 	 * @param {number} offset
 	 */
 	_changeImage(offset) {
-		const nexImage = this._images[this._currentIndex + offset];
+		const nexImage = this.images[this._currentIndex + offset];
 
 		/** @type {HTMLImageElement | HTMLVideoElement} */
 		const image =
