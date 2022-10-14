@@ -67,13 +67,19 @@ export class GalleryFactory {
 			await this._fetchData();
 		}
 
-		this.media = this._data.media.filter(
+		const medias = this._data.media.filter(
 			/**
 			 * @param {Media} media
 			 * @returns {boolean}
 			 */
 			(media) => media.photographerId === +this._id
 		);
+
+		medias.forEach((media) => {
+			media.isLiked = false;
+		});
+
+		this._media = medias;
 
 		return this;
 	}
@@ -282,17 +288,25 @@ export class GalleryFactory {
 
 	/** @param {Media} media */
 	like(media) {
-		media.likes += 1;
+		if (media.isLiked) {
+			media.likes--;
+			media.isLiked = false;
+		} else {
+			media.likes++;
+			media.isLiked = true;
+		}
 		this._updateLikes(media);
 		this._updateTotalLikes();
 	}
 
 	/** @param {Media} media */
 	_updateLikes(media) {
+		/** @type {HTMLParagraphElement} */
 		const like = document.querySelector(`[data-index="${media.id}"] .gallery-likes`);
-		let [likeNumber, image] = like.innerHTML.split("<");
-		likeNumber = media.likes.toString();
-		like.innerHTML = `${likeNumber}<${image}`;
+		const [likeNumber, image] = like.childNodes;
+		likeNumber.textContent = media.likes.toString();
+		// @ts-ignore
+		image.src = `../../assets/icons/heart${!media.isLiked ? "-empty" : ""}.svg`;
 	}
 
 	_updateTotalLikes() {

@@ -23,6 +23,7 @@ export const Photographer = {};
  * @property {number} likes
  * @property {string} date
  * @property {number} price
+ * @property {boolean} [isLiked]
  */
 
 export const Media = {};
