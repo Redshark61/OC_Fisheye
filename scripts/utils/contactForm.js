@@ -1,13 +1,28 @@
-function displayModal() {
-	const modal = document.getElementById("contact_modal");
-	if (modal) {
-		modal.style.display = "block";
+/**
+ * @param {MouseEvent} e
+ */
+export function toggleModal(e) {
+	e.preventDefault();
+	const element = /** @type {HTMLElement} */ (e.target);
+
+	/**@type {HTMLDivElement}*/
+	const modal = document.querySelector(element.getAttribute("data-modal"));
+	modal.classList.toggle("hidden");
+
+	document.body.classList.toggle("overflow-hidden");
+}
+
+/**
+ * @param {MouseEvent} e
+ */
+export function sendForm(e) {
+	e.preventDefault();
+	const button = /** @type {HTMLButtonElement} */ (e.target);
+	const form = button.closest("form");
+	const formData = new FormData(form);
+	const data = Object.fromEntries(formData);
+	const actionType = button.getAttribute("data-send-to");
+	if (actionType === "log") {
+		console.log(data);
 	}
 }
-function closeModal() {
-	const modal = document.getElementById("contact_modal");
-	if (modal) {
-		modal.style.display = "none";
-	}
-}
-//# sourceMappingURL=contactForm.js.map

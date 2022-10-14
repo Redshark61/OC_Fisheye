@@ -28,7 +28,13 @@
 		<main id="main">
 			<div class="photograph-header">
 				<div class="photograph-description"></div>
-				<button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+				<button
+					class="contact_button"
+					data-js-action="toggleModal"
+					data-modal="#contact_modal"
+				>
+					Contactez-moi
+				</button>
 			</div>
 
 			<form action="" class="sort">
@@ -42,18 +48,44 @@
 			<div class="photograph-gallery"></div>
 		</main>
 
-		<div id="contact_modal">
+		<div id="contact_modal" class="hidden">
 			<div class="modal">
 				<header>
-					<h2>Contactez-moi</h2>
-					<img src="assets/icons/close.svg" onclick="closeModal()" />
-				</header>
-				<form>
 					<div>
-						<label>Prénom</label>
-						<input />
+						<h2>Contactez-moi</h2>
+						<h2 id="photographer-name"></h2>
 					</div>
-					<button class="contact_button">Envoyer</button>
+					<img
+						src="assets/icons/close.svg"
+						data-js-action="toggleModal"
+						data-modal="#contact_modal"
+					/>
+				</header>
+				<form action="" method="post" id="contact-form">
+					<div>
+						<label for="firstname">Prénom</label>
+						<input id="firstname" name="firstname" required />
+					</div>
+					<div>
+						<label for="lastname">Nom</label>
+						<input id="lastname" name="lastname" required />
+					</div>
+					<div>
+						<label for="email">Email</label>
+						<input id="email" name="email" required />
+					</div>
+					<div>
+						<label for="message">Votre message</label>
+						<textarea id="message" name="message" required></textarea>
+					</div>
+					<button
+						class="contact_button"
+						data-js-action="send-form"
+						data-send-to="log"
+						data-form="#contact-form"
+					>
+						Envoyer
+					</button>
 				</form>
 			</div>
 		</div>
@@ -61,6 +93,5 @@
 		<div class="total-likes"></div>
 
 		<script type="module" src="/scripts/photographer.js"></script>
-		<script src="/scripts/utils/contactForm.js"></script>
 	</body>
 </html>

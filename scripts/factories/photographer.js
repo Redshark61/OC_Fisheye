@@ -87,6 +87,9 @@ export class GalleryFactory {
 	buildPhotographerPresentation() {
 		const header = document.querySelector(".photograph-header");
 		const description = document.querySelector(".photograph-description");
+		const h2 = document.querySelector("#photographer-name");
+		console.log(this._photographer);
+		h2.innerHTML = this._photographer.name;
 
 		const thumbnail = new PhotographerThumbnail(this._photographer);
 		const { title, location, tagline, image } = thumbnail.create();
