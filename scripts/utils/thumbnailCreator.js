@@ -3,7 +3,6 @@
  */
 export default (video) => {
 	var $canvas = document.createElement("canvas");
-	$canvas.className = "gallery-image";
 
 	var $ctx = $canvas.getContext("2d");
 	var $video = document.createElement("video");
@@ -20,7 +19,10 @@ export default (video) => {
 
 	$video.addEventListener("canplay", function () {
 		$canvas.style.display = "inline";
+		$canvas.width = $video.videoWidth;
+		$canvas.height = $video.videoHeight;
 		$ctx.drawImage($video, 0, 0, $video.videoWidth, $video.videoHeight);
+		$canvas.className = "gallery-image";
 	});
 
 	return $canvas;
