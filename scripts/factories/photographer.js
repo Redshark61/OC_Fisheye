@@ -111,6 +111,7 @@ export class GalleryFactory {
 				const figure = document.createElement("figure");
 				figure.classList.add("gallery-figure");
 
+				/** @type {HTMLDivElement} */
 				let wrapper;
 				let type = "image";
 				const src = `${this._getPath()}${media?.image ?? media?.video}`;
@@ -122,6 +123,8 @@ export class GalleryFactory {
 					const video = new Video(src);
 					({ wrapper, type } = video.create());
 				}
+
+				figure.setAttribute("data-index", media.id.toString());
 
 				const figureRenderer = new Figure(
 					this,
@@ -275,5 +278,26 @@ export class GalleryFactory {
 		const modal = document.querySelector(".modal-photo");
 		modal.remove();
 		window.onkeydown = null;
+	}
+
+	/** @param {Media} media */
+	like(media) {
+		media.likes += 1;
+		this._updateLikes(media);
+		this._updateTotalLikes();
+	}
+
+	/** @param {Media} media */
+	_updateLikes(media) {
+		const like = document.querySelector(`[data-index="${media.id}"] .gallery-likes`);
+		let [likeNumber, image] = like.innerHTML.split("<");
+		likeNumber = media.likes.toString();
+		like.innerHTML = `${likeNumber}<${image}`;
+	}
+
+	_updateTotalLikes() {
+		const totalLikes = document.querySelector(".total-likes span");
+		const likes = this._media.reduce((acc, media) => acc + media.likes, 0);
+		totalLikes.childNodes[0].textContent = likes.toString();
 	}
 }

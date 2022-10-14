@@ -29,14 +29,21 @@ export class Figure {
 	render() {
 		const figcaption = document.createElement("figcaption");
 		figcaption.classList.add("gallery-figcaption");
+
 		const title = document.createElement("h3");
 		title.classList.add("gallery-title");
 		title.textContent = this._media.title;
+
 		const likes = document.createElement("p");
 		likes.classList.add("gallery-likes");
 		likes.innerHTML =
 			this._media.likes +
 			"<img src='../../assets/icons/heart.svg' class='like' alt='likes' />";
+
+		likes.addEventListener("click", () => {
+			this._Factory.like(this._media);
+		});
+
 		const currentImage = {
 			title: this._media.title,
 			src: this._src,
@@ -45,12 +52,17 @@ export class Figure {
 		};
 
 		this._Factory.images.push(currentImage);
-
-		this._figure.addEventListener("click", (e) => {
-			this._Factory.openImage(e, currentImage);
-		});
 		figcaption.append(title, likes);
 		this._figure.append(this._wrapper, figcaption);
+
+		this._figure.children[0].addEventListener(
+			"click",
+			/**@param {MouseEvent} e */
+			(e) => {
+				this._Factory.openImage(e, currentImage);
+			}
+		);
+
 		this._gallery.append(this._figure);
 	}
 }
