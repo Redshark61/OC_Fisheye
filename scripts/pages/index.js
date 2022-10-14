@@ -1,25 +1,17 @@
-import { PhotographerFactory } from "../factories/photographer.js";
+import { PhotographerFactory } from "../factories/index.js";
 
 /**
  * @typedef {import('../../@types/index.js').Data} Data
- */
-
-/**
  * @typedef {import("../../@types/index.js").Photographer} Photographer
  */
 
-/**
- *
- * @returns {Promise<{photographers: Photographer[]}>}
- */
+/** @returns {Promise<{photographers: Photographer[]}>}*/
 async function getPhotographers() {
 	// Penser à remplacer par les données récupérées dans le json
 	const photographers = await fetch("../../data/photographers.json")
 		.then((response) => response.json())
 		.then(
-			/**
-			 * @param {Data} data
-			 */
+			/** @param {Data} data*/
 			(data) => data.photographers
 		);
 
@@ -27,10 +19,7 @@ async function getPhotographers() {
 	return { photographers };
 }
 
-/**
- *
- * @param {Photographer[]} photographers
- */
+/**@param {Photographer[]} photographers*/
 async function displayData(photographers) {
 	const photographersSection = document.querySelector(".photographer_section");
 
