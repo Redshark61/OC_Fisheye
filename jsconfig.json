@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"checkJs": true,
-		"lib": ["es2015", "dom", "DOM.Iterable"],
+		"lib": ["ES2019", "dom", "DOM.Iterable"],
 		"target": "es2015"
 	},
 	"include": ["@types/*.js", "scripts/**/*.js"],
