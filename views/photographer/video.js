@@ -1,5 +1,3 @@
-import thumbnailCreator from "../../scripts/utils/thumbnailCreator.js";
-
 export class Video {
 	/**
 	 * @param {string} src
@@ -9,10 +7,16 @@ export class Video {
 	}
 
 	create() {
-		const canvas = thumbnailCreator(this._src);
+		// const canvas = thumbnailCreator(this._src);
 		const wrapper = document.createElement("div");
-		wrapper.classList.add("canvas-wrapper");
-		wrapper.append(canvas);
+		const video = document.createElement("video");
+		video.classList.add("gallery-image");
+		const source = document.createElement("source");
+		source.src = this._src;
+		video.appendChild(source);
+		wrapper.appendChild(video);
+		wrapper.classList.add("image-wrapper");
+		// wrapper.append(canvas);
 		const type = "video";
 
 		return { wrapper, type };
