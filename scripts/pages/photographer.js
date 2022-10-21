@@ -33,6 +33,7 @@ export async function build() {
 	$buttonsSendForm.forEach(($button) => {
 		$button.onclick = (e) => {
 			sendForm(e);
+			toggleModal(e);
 		};
 	});
 }
