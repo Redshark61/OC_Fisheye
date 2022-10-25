@@ -108,7 +108,7 @@ export class GalleryFactory {
 		if (gallery.childElementCount > 0) {
 			gallery.innerHTML = "";
 		}
-
+		let tabIndex = 1;
 		medias.forEach(
 			/**
 			 * @param {Media} media
@@ -118,6 +118,8 @@ export class GalleryFactory {
 				this._totalLikes += media.likes;
 
 				const figure = document.createElement("figure");
+				figure.tabIndex = tabIndex;
+				tabIndex++;
 				figure.classList.add("gallery-figure");
 
 				/** @type {HTMLDivElement} */
@@ -135,7 +137,7 @@ export class GalleryFactory {
 
 				figure.setAttribute("data-index", media.id.toString());
 
-				const figureRenderer = new Figure(
+				tabIndex = new Figure(
 					this,
 					media,
 					figure,
@@ -143,9 +145,9 @@ export class GalleryFactory {
 					src,
 					type,
 					i,
-					wrapper
-				);
-				figureRenderer.render();
+					wrapper,
+					tabIndex
+				).render();
 			}
 		);
 
@@ -215,14 +217,17 @@ export class GalleryFactory {
 		const modalClose = document.createElement("img");
 		modalClose.src = "../../assets/icons/close-red.svg";
 		modalClose.classList.add("modal-close");
+		modalClose.alt = "Fermer la fenêtre";
 		modalClose.addEventListener("click", () => this._closeModal());
 
 		const divLeft = document.createElement("img");
 		divLeft.src = "../../assets/icons/left.svg";
+		divLeft.alt = "Image précédente";
 		divLeft.classList.add("div-left");
 
 		const divRight = document.createElement("img");
 		divRight.src = "../../assets/icons/right.svg";
+		divRight.alt = "Image suivante";
 		divRight.classList.add("div-right");
 
 		divLeft.onclick = () => this._changeImage(-1);

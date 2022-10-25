@@ -15,7 +15,7 @@ export class Figure {
 	 * @param {number} i
 	 * @param {HTMLDivElement} wrapper
 	 */
-	constructor(Factory, media, figure, gallery, src, type, i, wrapper) {
+	constructor(Factory, media, figure, gallery, src, type, i, wrapper, tabIndex) {
 		this._Factory = Factory;
 		this._figure = figure;
 		this._media = media;
@@ -24,6 +24,7 @@ export class Figure {
 		this._type = type;
 		this._i = i;
 		this._wrapper = wrapper;
+		this._tabIndex = tabIndex;
 	}
 
 	render() {
@@ -35,6 +36,7 @@ export class Figure {
 		title.textContent = this._media.title;
 
 		const likes = document.createElement("p");
+		likes.tabIndex = this._tabIndex;
 		likes.classList.add("gallery-likes");
 		likes.innerHTML =
 			this._media.likes +
@@ -44,6 +46,12 @@ export class Figure {
 
 		likes.addEventListener("click", () => {
 			this._Factory.like(this._media);
+		});
+
+		likes.addEventListener("keydown", (e) => {
+			if (e.key === "Enter") {
+				this._Factory.like(this._media);
+			}
 		});
 
 		const currentImage = {
@@ -66,5 +74,6 @@ export class Figure {
 		);
 
 		this._gallery.append(this._figure);
+		return this._tabIndex++;
 	}
 }

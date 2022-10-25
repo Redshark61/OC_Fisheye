@@ -4,7 +4,7 @@
 
 export class PhotographerFactory {
 	/** @param {Photographer} data */
-	constructor(data) {
+	constructor(data, index) {
 		this._name = data.name;
 		this._portrait = data.portrait;
 		this._pictureURL = `/assets/photos/Photographers ID Photos/${this._portrait}`;
@@ -12,19 +12,21 @@ export class PhotographerFactory {
 		this._tagline = data.tagline;
 		this._price = data.price;
 		this._id = data.id;
+		this._index = index;
 	}
 
 	/**@returns {HTMLAnchorElement} */
 	getUserCardDOM() {
 		const article = document.createElement("a");
-		article.setAttribute("href", `./photographer.html?id=${this._id}`);
+		article.href = `./photographer.html?id=${this._id}`;
 		article.classList.add("photographer");
 
 		const img = document.createElement("img");
 		const wrapper = document.createElement("div");
 		wrapper.classList.add("image-wrapper");
-		img.setAttribute("src", this._pictureURL);
-		img.setAttribute("alt", this._name);
+		wrapper.tabIndex = this._index + 1;
+		img.src = this._pictureURL;
+		img.alt = this._name;
 		img.classList.add("photographer__img");
 		wrapper.appendChild(img);
 

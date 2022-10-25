@@ -14,7 +14,7 @@ export class Photo {
 		const image = document.createElement("img");
 		const wrapper = document.createElement("div");
 		wrapper.classList.add("image-wrapper");
-		image.setAttribute("alt", this._media.title);
+		image.alt = this._media.title;
 		image.classList.add("gallery-image");
 		image.src = this._src;
 		wrapper.append(image);

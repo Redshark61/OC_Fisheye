@@ -21,7 +21,7 @@ export class PhotographerThumbnail {
 		tagline.textContent = this._photographer.tagline;
 
 		const image = document.createElement("img");
-		image.setAttribute("alt", this._photographer.name);
+		image.alt = this._photographer.name;
 		image.classList.add("photograph-image");
 		image.src = `../../assets/photos/Photographers ID Photos/${this._photographer.portrait}`;
 
