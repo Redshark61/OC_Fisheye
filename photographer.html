@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/png" href="assets/favicon.png" />
@@ -20,8 +20,8 @@
 	</head>
 	<body>
 		<header>
-			<a href="/">
-				<img src="assets/images/logo.png" class="logo" />
+			<a href="/" role="button" aria-label="Retour à l'accueil">
+				<img src="assets/images/logo.png" alt="Logo FIshEye" class="logo" />
 			</a>
 		</header>
 
@@ -49,9 +49,9 @@
 		</main>
 
 		<div id="contact_modal" class="hidden">
-			<div class="modal">
+			<div class="modal" aria-labelledby="modal_title" role="dialog">
 				<header>
-					<div>
+					<div id="modal_title">
 						<h2>Contactez-moi</h2>
 						<h2 id="photographer-name"></h2>
 					</div>
@@ -59,24 +59,47 @@
 						src="assets/icons/close.svg"
 						data-js-action="toggleModal"
 						data-modal="#contact_modal"
+						alt="Fermer le formulaire de contact"
 					/>
 				</header>
 				<form action="" method="post" id="contact-form">
 					<div>
-						<label for="firstname">Prénom</label>
-						<input id="firstname" name="firstname" required />
+						<label for="firstname" id="firstname-label">Prénom</label>
+						<input
+							id="firstname"
+							name="firstname"
+							type="text"
+							aria-labelledby="firstname-label"
+							required
+						/>
 					</div>
 					<div>
-						<label for="lastname">Nom</label>
-						<input id="lastname" name="lastname" required />
+						<label for="lastname" id="lastname-label">Nom</label>
+						<input
+							id="lastname"
+							name="lastname"
+							aria-labelledby="lastname-label"
+							required
+						/>
 					</div>
 					<div>
-						<label for="email">Email</label>
-						<input id="email" name="email" required />
+						<label for="email" id="email-label">Email</label>
+						<input
+							id="email"
+							name="email"
+							type="email"
+							aria-labelledby="email-label"
+							required
+						/>
 					</div>
 					<div>
-						<label for="message">Votre message</label>
-						<textarea id="message" name="message" required></textarea>
+						<label for="message" id="message-label">Votre message</label>
+						<textarea
+							id="message"
+							name="message"
+							aria-labelledby="message-label"
+							required
+						></textarea>
 					</div>
 					<button
 						class="contact_button"
@@ -91,7 +114,7 @@
 			</div>
 		</div>
 
-		<div class="total-likes"></div>
+		<div class="total-likes" aria-label="Nombre total de likes" role="status"></div>
 
 		<script type="module" src="/scripts/photographer.js"></script>
 	</body>
