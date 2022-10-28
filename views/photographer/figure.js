@@ -73,6 +73,16 @@ export class Figure {
 			}
 		);
 
+		this._figure.children[0].addEventListener(
+			"keydown",
+			/**@param {KeyboardEvent} e */
+			(e) => {
+				if (e.key === "Enter") {
+					this._Factory.openImage(e, currentImage);
+				}
+			}
+		);
+
 		this._gallery.append(this._figure);
 		return this._tabIndex++;
 	}

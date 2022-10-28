@@ -20,15 +20,18 @@
 	</head>
 	<body>
 		<header>
-			<a href="/" role="button" aria-label="Retour à l'accueil">
-				<img src="assets/images/logo.png" alt="Logo FIshEye" class="logo" />
-			</a>
+			<button class="logo no-button" tabindex="1" role="link">
+				<a href="/" aria-label="Retour à l'accueil">
+					<img src="assets/images/logo.png" alt="Logo FIshEye" />
+				</a>
+			</button>
 		</header>
 
 		<main id="main">
 			<div class="photograph-header">
 				<div class="photograph-description"></div>
 				<button
+					tabindex="2"
 					class="contact_button"
 					data-js-action="toggleModal"
 					data-modal="#contact_modal"
@@ -39,7 +42,7 @@
 
 			<form action="" class="sort">
 				<label for="sort">Trier par</label>
-				<select name="sort" id="sort">
+				<select tabindex="3" name="sort" id="sort">
 					<option value="date" selected>Date</option>
 					<option disabled>__________</option>
 					<option value="popularity">Popularité</option>
@@ -57,12 +60,14 @@
 						<h2>Contactez-moi</h2>
 						<h2 id="photographer-name"></h2>
 					</div>
-					<img
-						src="assets/icons/close.svg"
+					<button
+						tabindex="0"
+						class="no-button"
 						data-js-action="toggleModal"
 						data-modal="#contact_modal"
-						alt="Fermer le formulaire de contact"
-					/>
+					>
+						<img src="assets/icons/close.svg" alt="Fermer le formulaire de contact" />
+					</button>
 				</header>
 				<form action="" method="post" id="contact-form">
 					<div>

@@ -1,11 +1,17 @@
 export class Video {
 	/**
 	 * @param {string} src
+	 * @param {number} tabIndex
 	 */
-	constructor(src) {
+	constructor(src, tabIndex) {
 		this._src = src;
+		this._tabIndex = tabIndex;
 	}
 
+	/**
+	 *
+	 * @returns {[{wrapper: HTMLDivElement, type:string}, number]}
+	 */
 	create() {
 		// const canvas = thumbnailCreator(this._src);
 		const wrapper = document.createElement("div");
@@ -16,9 +22,11 @@ export class Video {
 		video.appendChild(source);
 		wrapper.appendChild(video);
 		wrapper.classList.add("image-wrapper");
+		wrapper.tabIndex = this._tabIndex;
+		this._tabIndex++;
 		// wrapper.append(canvas);
 		const type = "video";
 
-		return { wrapper, type };
+		return [{ wrapper, type }, this._tabIndex];
 	}
 }

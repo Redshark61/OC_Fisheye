@@ -6,6 +6,10 @@
 	box-sizing: border-box;
 }
 
+*:focus {
+	outline: auto;
+}
+
 body {
 	font-family: "DM Sans", sans-serif;
 	position: relative;
@@ -25,8 +29,17 @@ h1 {
 }
 
 .logo {
-	height: 50px;
 	margin-left: 100px;
+}
+
+.no-button {
+	border: none;
+	background: transparent;
+}
+
+.logo img,
+img.logo {
+	height: 50px;
 }
 
 .photographer_section {

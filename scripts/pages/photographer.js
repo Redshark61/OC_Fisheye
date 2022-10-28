@@ -21,8 +21,14 @@ export async function build() {
 	);
 	$buttonsOpenModal.forEach(($button) => {
 		$button.onclick = (e) => {
-			console.log("click");
 			toggleModal(e);
+		};
+
+		$button.onkeydown = (e) => {
+			console.log(e);
+			if (e.key === "Enter") {
+				toggleModal(e);
+			}
 		};
 	});
 
@@ -34,6 +40,17 @@ export async function build() {
 		$button.onclick = (e) => {
 			sendForm(e);
 			toggleModal(e);
+		};
+	});
+
+	const buttonAsLink = /** @type {NodeListOf<HTMLButtonElement>} */ (
+		document.querySelectorAll('button[role="link"]')
+	);
+	buttonAsLink.forEach(($button) => {
+		$button.onkeydown = (e) => {
+			if (e.key === "Enter") {
+				window.location.href = /** @type {HTMLAnchorElement} */ ($button.children[0]).href;
+			}
 		};
 	});
 }

@@ -108,7 +108,7 @@ export class GalleryFactory {
 		if (gallery.childElementCount > 0) {
 			gallery.innerHTML = "";
 		}
-		let tabIndex = 1;
+		let tabIndex = 4;
 		medias.forEach(
 			/**
 			 * @param {Media} media
@@ -118,8 +118,6 @@ export class GalleryFactory {
 				this._totalLikes += media.likes;
 
 				const figure = document.createElement("figure");
-				figure.tabIndex = tabIndex;
-				tabIndex++;
 				figure.classList.add("gallery-figure");
 
 				/** @type {HTMLDivElement} */
@@ -128,11 +126,11 @@ export class GalleryFactory {
 				const src = `${this._getPath()}${media?.image ?? media?.video}`;
 
 				if (media.image) {
-					const photo = new Photo(media, src);
-					wrapper = photo.create();
+					const photo = new Photo(media, src, tabIndex);
+					[wrapper, tabIndex] = photo.create();
 				} else {
-					const video = new Video(src);
-					({ wrapper, type } = video.create());
+					const video = new Video(src, tabIndex);
+					[{ wrapper, type }, tabIndex] = video.create();
 				}
 
 				figure.setAttribute("data-index", media.id.toString());
@@ -186,7 +184,7 @@ export class GalleryFactory {
 	}
 
 	/**
-	 * @param {MouseEvent} event
+	 * @param {MouseEvent | KeyboardEvent} event
 	 * @param {{title: string, src: string, id:number, type:string}} image
 	 */
 	openImage(event, image) {

@@ -1,24 +1,20 @@
-/**
- * @param {MouseEvent} e
- */
+/** @param {MouseEvent | KeyboardEvent} e */
 export function toggleModal(e) {
 	e.preventDefault();
-	const element = /** @type {HTMLElement} */ (e.target);
+	let element = /** @type {HTMLElement} */ (e.target);
 
+	if (element.tagName !== "BUTTON") {
+		element = element.parentElement;
+	}
 	/**@type {HTMLDivElement}*/
 	const modal = document.querySelector(element.getAttribute("data-modal"));
 	modal.classList.toggle("hidden");
-	modal.setAttribute(
-		"aria-hidden",
-		modal.getAttribute("aria-hidden") === "true" ? "false" : "true"
-	);
-
+	modal.ariaHidden = modal.getAttribute("aria-hidden") === "true" ? "false" : "true";
+	modal.querySelectorAll("button")[0].focus();
 	document.body.classList.toggle("overflow-hidden");
 }
 
-/**
- * @param {MouseEvent} e
- */
+/** @param {MouseEvent} e */
 export function sendForm(e) {
 	e.preventDefault();
 	const button = /** @type {HTMLButtonElement} */ (e.target);
