@@ -8,6 +8,10 @@ export function toggleModal(e) {
 	/**@type {HTMLDivElement}*/
 	const modal = document.querySelector(element.getAttribute("data-modal"));
 	modal.classList.toggle("hidden");
+	modal.setAttribute(
+		"aria-hidden",
+		modal.getAttribute("aria-hidden") === "true" ? "false" : "true"
+	);
 
 	document.body.classList.toggle("overflow-hidden");
 }

@@ -41,14 +41,16 @@
 				<label for="sort">Trier par</label>
 				<select name="sort" id="sort">
 					<option value="date" selected>Date</option>
+					<option disabled>__________</option>
 					<option value="popularity">Popularité</option>
+					<option disabled>__________</option>
 					<option value="title">Titre</option>
 				</select>
 			</form>
 			<div class="photograph-gallery"></div>
 		</main>
 
-		<div id="contact_modal" class="hidden">
+		<div id="contact_modal" class="hidden" aria-hidden="true">
 			<div class="modal" aria-labelledby="modal_title" role="dialog">
 				<header>
 					<div id="modal_title">
