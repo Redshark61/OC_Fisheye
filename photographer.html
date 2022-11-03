@@ -20,18 +20,15 @@
 	</head>
 	<body>
 		<header>
-			<!-- <button class="logo no-button" tabindex="1" role="link"> -->
-			<a href="/" tabindex="0" aria-label="Retour à l'accueil">
+			<a href="/" class="logo" tabindex="0" aria-label="Retour à l'accueil">
 				<img src="assets/images/logo.png" alt="Logo FIshEye" />
 			</a>
-			<!-- </button> -->
 		</header>
 
 		<main id="main">
 			<div class="photograph-header">
 				<div class="photograph-description"></div>
 				<button
-					tabindex="0"
 					class="contact_button"
 					data-js-action="toggleModal"
 					data-modal="#contact_modal"
@@ -42,7 +39,7 @@
 
 			<form action="" class="sort">
 				<label for="sort">Trier par</label>
-				<select tabindex="0" name="sort" id="sort">
+				<select name="sort" id="sort" tabindex="0">
 					<option value="date" selected>Date</option>
 					<option disabled>__________</option>
 					<option value="popularity">Popularité</option>

@@ -23,13 +23,6 @@ export async function build() {
 		$button.onclick = (e) => {
 			toggleModal(e);
 		};
-
-		$button.onkeydown = (e) => {
-			console.log(e);
-			if (e.key === "Enter") {
-				toggleModal(e);
-			}
-		};
 	});
 
 	const $buttonsSendForm = /** @type {NodeListOf<HTMLButtonElement>} */ (

@@ -12,16 +12,11 @@ export class Photo {
 		this._tabIndex = tabIndex;
 	}
 
-	/**
-	 *
-	 * @returns {[HTMLDivElement, number]}
-	 */
+	/** @returns {[HTMLButtonElement, number]} */
 	create() {
 		const image = document.createElement("img");
-		const wrapper = document.createElement("div");
-		wrapper.classList.add("image-wrapper");
-		wrapper.tabIndex = this._tabIndex;
-		this._tabIndex++;
+		const wrapper = document.createElement("button");
+		wrapper.classList.add("image-wrapper", "no-button");
 		image.alt = this._media.title;
 		image.classList.add("gallery-image");
 		image.src = this._src;

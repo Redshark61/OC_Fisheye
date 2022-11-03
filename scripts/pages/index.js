@@ -28,10 +28,6 @@ async function displayData(photographers) {
 		const userCardDOM = photographerModel.getUserCardDOM();
 		photographersSection?.appendChild(userCardDOM);
 	});
-
-	/** @type {HTMLImageElement} */
-	const logo = document.querySelector(".logo");
-	logo.tabIndex = photographers.length + 1;
 }
 
 export async function init() {

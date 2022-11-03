@@ -10,21 +10,17 @@ export class Video {
 
 	/**
 	 *
-	 * @returns {[{wrapper: HTMLDivElement, type:string}, number]}
+	 * @returns {[{wrapper: HTMLButtonElement, type:string}, number]}
 	 */
 	create() {
-		// const canvas = thumbnailCreator(this._src);
-		const wrapper = document.createElement("div");
+		const wrapper = document.createElement("button");
 		const video = document.createElement("video");
 		video.classList.add("gallery-image");
 		const source = document.createElement("source");
 		source.src = this._src;
 		video.appendChild(source);
 		wrapper.appendChild(video);
-		wrapper.classList.add("image-wrapper");
-		wrapper.tabIndex = this._tabIndex;
-		this._tabIndex++;
-		// wrapper.append(canvas);
+		wrapper.classList.add("image-wrapper", "no-button");
 		const type = "video";
 
 		return [{ wrapper, type }, this._tabIndex];

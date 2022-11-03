@@ -13,7 +13,7 @@ export class Figure {
 	 * @param {string} src
 	 * @param {string} type
 	 * @param {number} i
-	 * @param {HTMLDivElement} wrapper
+	 * @param {HTMLButtonElement} wrapper
 	 */
 	constructor(Factory, media, figure, gallery, src, type, i, wrapper, tabIndex) {
 		this._Factory = Factory;
@@ -35,9 +35,8 @@ export class Figure {
 		title.classList.add("gallery-title");
 		title.textContent = this._media.title;
 
-		const likes = document.createElement("p");
-		likes.tabIndex = this._tabIndex;
-		likes.classList.add("gallery-likes");
+		const likes = document.createElement("button");
+		likes.classList.add("gallery-likes", "no-button");
 		likes.innerHTML =
 			this._media.likes +
 			`<img src='../../assets/icons/heart${
@@ -46,12 +45,6 @@ export class Figure {
 
 		likes.addEventListener("click", () => {
 			this._Factory.like(this._media);
-		});
-
-		likes.addEventListener("keydown", (e) => {
-			if (e.key === "Enter") {
-				this._Factory.like(this._media);
-			}
 		});
 
 		const currentImage = {
@@ -70,16 +63,6 @@ export class Figure {
 			/**@param {MouseEvent} e */
 			(e) => {
 				this._Factory.openImage(e, currentImage);
-			}
-		);
-
-		this._figure.children[0].addEventListener(
-			"keydown",
-			/**@param {KeyboardEvent} e */
-			(e) => {
-				if (e.key === "Enter") {
-					this._Factory.openImage(e, currentImage);
-				}
 			}
 		);
 

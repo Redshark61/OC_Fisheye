@@ -7,7 +7,7 @@
 }
 
 *:focus {
-	outline: auto;
+	outline: 5px solid black;
 }
 
 body {

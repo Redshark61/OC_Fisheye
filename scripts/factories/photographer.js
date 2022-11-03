@@ -120,7 +120,7 @@ export class GalleryFactory {
 				const figure = document.createElement("figure");
 				figure.classList.add("gallery-figure");
 
-				/** @type {HTMLDivElement} */
+				/** @type {HTMLButtonElement} */
 				let wrapper;
 				let type = "image";
 				const src = `${this._getPath()}${media?.image ?? media?.video}`;
