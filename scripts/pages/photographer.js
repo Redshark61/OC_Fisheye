@@ -34,6 +34,18 @@ export async function build() {
 			sendForm(e);
 			toggleModal(e);
 		};
+
+		$button.onfocus = () => {
+			$button.onkeydown = (e) => {
+				if (e.key === "Tab" && !e.shiftKey) {
+					e.preventDefault();
+					$button
+						.closest("[role='dialog']")
+						.querySelector("[data-js-action='toggleModal']")
+						.focus();
+				}
+			};
+		};
 	});
 
 	const buttonAsLink = /** @type {NodeListOf<HTMLButtonElement>} */ (
