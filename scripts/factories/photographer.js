@@ -212,22 +212,28 @@ export class GalleryFactory {
 		const modalTitle = document.createElement("figcaption");
 		modalTitle.textContent = image.title;
 
-		const modalClose = document.createElement("img");
-		modalClose.src = "../../assets/icons/close-red.svg";
-		modalClose.classList.add("modal-close");
-		modalClose.alt = "Fermer la fenêtre";
+		const modalClose = document.createElement("button");
+		const imageClose = document.createElement("img");
+		imageClose.src = "../../assets/icons/close-red.svg";
+		imageClose.alt = "Fermer la fenêtre";
+		modalClose.classList.add("modal-close", "no-button");
+		modalClose.append(imageClose);
+
+		const divLeft = document.createElement("button");
+		const imageLeft = document.createElement("img");
+		imageLeft.src = "../../assets/icons/left.svg";
+		imageLeft.alt = "Image précédente";
+		divLeft.classList.add("div-left", "no-button");
+		divLeft.append(imageLeft);
+
+		const divRight = document.createElement("button");
+		const imageRight = document.createElement("img");
+		imageRight.src = "../../assets/icons/right.svg";
+		imageRight.alt = "Image suivante";
+		divRight.classList.add("div-right", "no-button");
+		divRight.append(imageRight);
+
 		modalClose.addEventListener("click", () => this._closeModal());
-
-		const divLeft = document.createElement("img");
-		divLeft.src = "../../assets/icons/left.svg";
-		divLeft.alt = "Image précédente";
-		divLeft.classList.add("div-left");
-
-		const divRight = document.createElement("img");
-		divRight.src = "../../assets/icons/right.svg";
-		divRight.alt = "Image suivante";
-		divRight.classList.add("div-right");
-
 		divLeft.onclick = () => this._changeImage(-1);
 		divRight.onclick = () => this._changeImage(1);
 
@@ -246,6 +252,7 @@ export class GalleryFactory {
 		modalContent.append(modalMedia, modalTitle);
 		modal.append(modalClose, divLeft, modalContent, divRight);
 		document.body.appendChild(modal);
+		modalClose.focus();
 	}
 
 	/**
