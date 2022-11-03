@@ -20,11 +20,11 @@ export class PhotographerFactory {
 		const article = document.createElement("a");
 		article.href = `./photographer.html?id=${this._id}`;
 		article.classList.add("photographer");
+		article.tabIndex = 0;
 
 		const img = document.createElement("img");
 		const wrapper = document.createElement("div");
 		wrapper.classList.add("image-wrapper");
-		wrapper.tabIndex = this._index + 1;
 		img.src = this._pictureURL;
 		img.alt = this._name;
 		img.classList.add("photographer__img");
