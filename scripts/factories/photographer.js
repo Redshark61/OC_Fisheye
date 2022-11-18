@@ -88,7 +88,6 @@ export class GalleryFactory {
 		const header = document.querySelector(".photograph-header");
 		const description = document.querySelector(".photograph-description");
 		const h2 = document.querySelector("#photographer-name");
-		console.log(this._photographer);
 		h2.innerHTML = this._photographer.name;
 
 		const thumbnail = new PhotographerThumbnail(this._photographer);
@@ -195,19 +194,7 @@ export class GalleryFactory {
 		const modalContent = document.createElement("div");
 		modalContent.classList.add("modal-content");
 
-		let modalMedia;
-		if (image.type === "image") {
-			modalMedia = document.createElement("img");
-			modalMedia.src = image.src;
-			modalMedia.setAttribute("alt", image.title);
-		} else {
-			modalMedia = document.createElement("video");
-			const source = document.createElement("source");
-			source.src = image.src;
-			source.type = "video/mp4";
-			modalMedia.append(source);
-			modalMedia.controls = true;
-		}
+		const modalMedia = this._createModal(image);
 
 		const modalTitle = document.createElement("figcaption");
 		modalTitle.textContent = image.title;
@@ -253,6 +240,27 @@ export class GalleryFactory {
 		modal.append(modalClose, divLeft, modalContent, divRight);
 		document.body.appendChild(modal);
 		modalClose.focus();
+	}
+
+	/**
+	 * @private
+	 * @param {{title: string, src: string, id:number, type:string}} image
+	 * */
+	_createModal(image) {
+		let modalMedia;
+		if (image.type === "image") {
+			modalMedia = document.createElement("img");
+			modalMedia.src = image.src;
+			modalMedia.setAttribute("alt", image.title);
+		} else {
+			modalMedia = document.createElement("video");
+			const source = document.createElement("source");
+			source.src = image.src;
+			source.type = "video/mp4";
+			modalMedia.append(source);
+			modalMedia.controls = true;
+		}
+		return modalMedia;
 	}
 
 	/**
