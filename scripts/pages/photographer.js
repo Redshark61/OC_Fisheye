@@ -39,10 +39,11 @@ export async function build() {
 			$button.onkeydown = (e) => {
 				if (e.key === "Tab" && !e.shiftKey) {
 					e.preventDefault();
-					$button
+					/**@type {HTMLDivElement}*/
+					const $div = $button
 						.closest("[role='dialog']")
-						.querySelector("[data-js-action='toggleModal']")
-						.focus();
+						.querySelector("[data-js-action='toggleModal']");
+					$div.focus();
 				}
 			};
 		};
