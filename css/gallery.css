@@ -144,6 +144,8 @@
 .gallery-likes {
 	display: flex;
 	align-items: center;
+	font-size: 24px;
+	color: #901c1c;
 }
 
 .gallery-title {
