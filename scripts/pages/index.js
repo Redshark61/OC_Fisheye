@@ -5,7 +5,7 @@ import { PhotographerFactory } from "../factories/index.js";
  * @typedef {import("../../@types/index.js").Photographer} Photographer
  */
 
-/** @returns {Promise<{photographers: Photographer[]}>}*/
+/** @returns {Promise<Photographer[]>}*/
 async function getPhotographers() {
 	// Penser à remplacer par les données récupérées dans le json
 	const photographers = await fetch("../../data/photographers.json")
@@ -16,7 +16,7 @@ async function getPhotographers() {
 		);
 
 	// et bien retourner le tableau photographers seulement une fois
-	return { photographers };
+	return photographers;
 }
 
 /**@param {Photographer[]} photographers*/
@@ -32,6 +32,6 @@ async function displayData(photographers) {
 
 export async function init() {
 	// Récupère les datas des photographes
-	const { photographers } = await getPhotographers();
+	const photographers = await getPhotographers();
 	displayData(photographers);
 }

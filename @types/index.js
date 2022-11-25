@@ -8,10 +8,7 @@
  * @property {number} price
  * @property {string} portrait
  */
-
 export const Photographer = {};
-
-/** @type {Photographer} */
 
 /**
  * @typedef Media
@@ -25,15 +22,11 @@ export const Photographer = {};
  * @property {number} price
  * @property {boolean} [isLiked]
  */
-
 export const Media = {};
-
-/** @type {Media} */
 
 /**
  * @typedef Data
  * @property {Photographer[]} photographers
  * @property {Media[]} media
  */
-
-export const Data = {}; /** @type {Data} */
+export const Data = {};
